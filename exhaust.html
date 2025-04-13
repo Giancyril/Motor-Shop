@@ -263,7 +263,7 @@
   <!-- Header -->
   <header class="header">
     <div class="nav-left">
-        <a href="index.html" class="nav-link">
+        <a href="home.html" class="nav-link">
             <i class="fas fa-arrow-left"></i>
         </a>
     </div>
@@ -433,16 +433,42 @@
             </div>
         </div>
 
-    </div>
-</section>
+        <div id="toast" class="toast"></div>
 
-  
-
-  <script>
-    function toggleMenu() {
-      document.querySelector('.nav-menu').classList.toggle('active');
-    }
-  </script>
+      </section>
+      
+        
+      
+        <script>
+          function toggleMenu() {
+            document.querySelector('.nav-menu').classList.toggle('active');
+          }
+          
+        // Attach click listener to all buttons with the class 'btn'
+        document.querySelectorAll('.btn').forEach(button => {
+          button.addEventListener('click', () => {
+            alert('Added to cart!');
+          });
+        });
+      
+        const toast = document.getElementById('toast');
+      
+        function showToast(message) {
+          toast.textContent = message;
+          toast.classList.add('show');
+      
+          setTimeout(() => {
+            toast.classList.remove('show');
+          }, 2000); // 2 seconds
+        }
+      
+        document.querySelectorAll('.btn').forEach(button => {
+          button.addEventListener('click', () => {
+            showToast('Added to cart!');
+          });
+        });
+        </script>
+      
 
 </body>
 </html>
