@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Motorcycle Transmission</title>
+  <style>
+    :root {
+      --primary-color: #2C3E50;
+      --secondary-color: #34495E;
+      --accent-color: #3498DB;
+      --text-color: #555;
+      --bg-color: #F5F7FA;
+      --white: #FFF;
+      --radius: 12px;
+      --transition: 0.3s ease-in-out;
+      --shadow-1: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-color);
+    }
+
+    /* Header */
+    .header {
+      background: var(--white);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 70px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      box-shadow: var(--shadow-1);
+      z-index: 1000;
+      transition: var(--transition);
+    }
+
+    .header.active { box-shadow: var(--shadow-1); }
+
+    .header .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+
+    .nav-menu {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+
+    .nav-link {
+      text-decoration: none;
+      color: var(--text-color);
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+
+    .nav-link:hover, 
+    .nav-link.active {
+      color: var(--accent-color);
+    }
+
+    /* Search Bar */
+.search-bar {
+    display: flex;
+    align-items: center;
+    background: var(--white);
+    padding: 8px 12px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-1);
+    width: 100%;
+    max-width: 250px; /* Adjust as needed */
+    position: relative;
+    margin-right: 70px; /* Keeps it centered */
+}
+
+.search-input {
+    border: none;
+    outline: none;
+    padding: 8px;
+    width: 100%;
+    font-size: 14px;
+    background: transparent;
+}
+
+.search-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--text-color);
+}
+
+.search-btn:hover {
+    color: var(--accent-color);
+}
+
+/* Centering the search bar properly inside the header */
+.nav-center {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .search-bar {
+        max-width: 180px;
+        padding: 6px 10px;
+    }
+}
+
+
+
+
+    /* Mobile Menu */
+    .nav-toggle-btn {
+      display: none;
+      cursor: pointer;
+      flex-direction: column;
+    }
+
+    .nav-toggle-btn span {
+      background: var(--secondary-color);
+      width: 22px;
+      height: 2px;
+      border-radius: 2px;
+      margin: 4px 0;
+      transition: var(--transition);
+    }
+
+    @media (max-width: 768px) {
+      .nav-menu {
+        position: fixed;
+        top: 70px;
+        right: -260px;
+        width: 260px;
+        background: var(--white);
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        box-shadow: var(--shadow-1);
+        transition: 0.3s ease-in-out;
+      }
+
+      .nav-menu.active {
+        right: 0;
+      }
+
+      .nav-toggle-btn {
+        display: flex;
+      }
+    }
+
+    /* Page Content */
+    .section-title {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin: 80px auto 30px; /* Centering and spacing */
+}
+
+
+    /* Engine Listings */
+    .engine-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .engine-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-1);
+      transition: var(--transition);
+      padding: 10px;
+    }
+
+    .engine-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .engine-card .card-banner {
+      width: 100%;
+      height: 200px;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .engine-card .card-banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .engine-card:hover .card-banner img {
+      transform: scale(1.05);
+    }
+
+    .engine-card .card-content {
+      padding: 15px;
+      text-align: center;
+    }
+
+    .engine-card .card-title {
+      font-size: 1.2rem;
+      color: var(--secondary-color);
+      margin-bottom: 10px;
+    }
+
+    .engine-card .card-info {
+      font-size: 0.9rem;
+      color: var(--text-color);
+      margin-bottom: 15px;
+    }
+
+    .engine-card .card-price {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--accent-color);
+      margin-bottom: 15px;
+    }
+
+    .btn {
+  background: #2196F3;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 25px; /* Fully rounded corners */
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: 0.3s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+
+  </style>
+</head>
+<body>
+  
+  <!-- Header -->
+  <header class="header">
+    <div class="nav-left">
+        <a href="index.html" class="nav-link">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+    </div>
+    <div class="nav-right">
+        <div class="search-bar">
+            <input type="text" placeholder="Search..." class="search-input">
+            <button class="search-btn">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    <div class="nav-toggle-btn" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</header>
+
+
+
+
+ <!-- Transmission Parts Listings Section -->
+<section>
+    <h2 class="section-title">Motorcycle Transmission Components</h2>
+    <div class="engine-list">
+
+        <!-- Transmission Part 1 -->
+        <div class="engine-card">
+            <div class="card-banner">
+                <img src="./assets/images/transmission-a.png" alt="Motorcycle Clutch Kit">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Motorcycle Clutch Kit</h3>
+                <p class="card-info">
+                    <i class="fas fa-cogs"></i> High-Friction Plates |
+                    <i class="fas fa-tools"></i> Easy Installation
+                </p>
+                <p class="card-price">$130 / kit</p>
+                <button class="btn"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+            </div>
+        </div>
+
+        <!-- Transmission Part 2 -->
+        <div class="engine-card">
+            <div class="card-banner">
+                <img src="./assets/images/transmission-b.jpg" alt="Transmission Gear Set">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Transmission Gear Set</h3>
+                <p class="card-info">
+                    <i class="fas fa-cogs"></i> Heat-Treated Steel |
+                    <i class="fas fa-shield-alt"></i> High Torque Capacity
+                </p>
+                <p class="card-price">$200 / set</p>
+                <button class="btn"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+            </div>
+        </div>
+
+        <!-- Transmission Part 3 -->
+        <div class="engine-card">
+            <div class="card-banner">
+                <img src="./assets/images/transmission-c.avif" alt="Shift Lever">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Shift Lever</h3>
+                <p class="card-info">
+                    <i class="fas fa-wrench"></i> CNC-Machined Alloy |
+                    <i class="fas fa-cogs"></i> Foldable Tip
+                </p>
+                <p class="card-price">$45 / unit</p>
+                <button class="btn"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+            </div>
+        </div>
+
+        <!-- Transmission Part 4 -->
+        <div class="engine-card">
+            <div class="card-banner">
+                <img src="./assets/images/transmission-d.webp" alt="Clutch Lever">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Clutch Lever</h3>
+                <p class="card-info">
+                    <i class="fas fa-tools"></i> Adjustable Reach |
+                    <i class="fas fa-cogs"></i> Lightweight Aluminum
+                </p>
+                <p class="card-price">$35 / unit</p>
+                <button class="btn"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+            </div>
+        </div>
+
+        <!-- Transmission Part 5 -->
+        <div class="engine-card">
+            <div class="card-banner">
+                <img src="./assets/images/transmission-e.jpg" alt="Clutch Cable">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Clutch Cable</h3>
+                <p class="card-info">
+                    <i class="fas fa-cogs"></i> Stainless Steel Core |
+                    <i class="fas fa-wrench"></i> Smooth Pull Action
+                </p>
+                <p class="card-price">$25 / unit</p>
+                <button class="btn"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+            </div>
+        </div>
+
+        <!-- Transmission Part 6 -->
+        <div class="engine-card">
+            <div class="card-banner">
+                <img src="./assets/images/transmission-f.jpg" alt="Sprocket Set">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Sprocket Set</h3>
+                <p class="card-info">
+                    <i class="fas fa-cogs"></i> Hardened Steel |
+                    <i class="fas fa-shield-alt"></i> Wear-Resistant Design
+                </p>
+                <p class="card-price">$85 / set</p>
+                <button class="btn"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+            </div>
+        </div>
+
+        <!-- Transmission Part 7 -->
+        <div class="engine-card">
+            <div class="card-banner">
+                <img src="./assets/images/transmission-g.avif" alt="Gear Shift Shaft">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Gear Shift Shaft</h3>
+                <p class="card-info">
+                    <i class="fas fa-tools"></i> OEM Quality |
+                    <i class="fas fa-cogs"></i> High Strength Steel
+                </p>
+                <p class="card-price">$60 / unit</p>
+                <button class="btn"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+            </div>
+        </div>
+
+        <!-- Transmission Part 8 -->
+        <div class="engine-card">
+            <div class="card-banner">
+                <img src="./assets/images/transmission-h.jpg" alt="Transmission Bearing">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Transmission Bearing</h3>
+                <p class="card-info">
+                    <i class="fas fa-cogs"></i> Heat-Resistant |
+                    <i class="fas fa-shield-alt"></i> Smooth Operation
+                </p>
+                <p class="card-price">$20 / piece</p>
+                <button class="btn"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+            </div>
+        </div>
+
+        <!-- Transmission Part 9 -->
+        <div class="engine-card">
+            <div class="card-banner">
+                <img src="./assets/images/transmission-i.jpg" alt="Clutch Basket">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Clutch Basket</h3>
+                <p class="card-info">
+                    <i class="fas fa-cogs"></i> Billet Aluminum |
+                    <i class="fas fa-tools"></i> Anti-Warp Design
+                </p>
+                <p class="card-price">$110 / unit</p>
+                <button class="btn"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+  
+
+  <script>
+    function toggleMenu() {
+      document.querySelector('.nav-menu').classList.toggle('active');
+    }
+  </script>
+
+</body>
+</html>

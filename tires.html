@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Motorcycle Tires</title>
+  <style>
+    :root {
+      --primary-color: #2C3E50;
+      --secondary-color: #34495E;
+      --accent-color: #3498DB;
+      --text-color: #555;
+      --bg-color: #F5F7FA;
+      --white: #FFF;
+      --radius: 12px;
+      --transition: 0.3s ease-in-out;
+      --shadow-1: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-color);
+    }
+
+    /* Header */
+    .header {
+      background: var(--white);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 70px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      box-shadow: var(--shadow-1);
+      z-index: 1000;
+      transition: var(--transition);
+    }
+
+    .header.active { box-shadow: var(--shadow-1); }
+
+    .header .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+
+    .nav-menu {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+
+    .nav-link {
+      text-decoration: none;
+      color: var(--text-color);
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+
+    .nav-link:hover, 
+    .nav-link.active {
+      color: var(--accent-color);
+    }
+
+    /* Search Bar */
+.search-bar {
+    display: flex;
+    align-items: center;
+    background: var(--white);
+    padding: 8px 12px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-1);
+    width: 100%;
+    max-width: 250px; /* Adjust as needed */
+    position: relative;
+    margin-right: 70px; /* Keeps it centered */
+}
+
+.search-input {
+    border: none;
+    outline: none;
+    padding: 8px;
+    width: 100%;
+    font-size: 14px;
+    background: transparent;
+}
+
+.search-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--text-color);
+}
+
+.search-btn:hover {
+    color: var(--accent-color);
+}
+
+/* Centering the search bar properly inside the header */
+.nav-center {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .search-bar {
+        max-width: 180px;
+        padding: 6px 10px;
+    }
+}
+
+
+
+
+    /* Mobile Menu */
+    .nav-toggle-btn {
+      display: none;
+      cursor: pointer;
+      flex-direction: column;
+    }
+
+    .nav-toggle-btn span {
+      background: var(--secondary-color);
+      width: 22px;
+      height: 2px;
+      border-radius: 2px;
+      margin: 4px 0;
+      transition: var(--transition);
+    }
+
+    @media (max-width: 768px) {
+      .nav-menu {
+        position: fixed;
+        top: 70px;
+        right: -260px;
+        width: 260px;
+        background: var(--white);
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        box-shadow: var(--shadow-1);
+        transition: 0.3s ease-in-out;
+      }
+
+      .nav-menu.active {
+        right: 0;
+      }
+
+      .nav-toggle-btn {
+        display: flex;
+      }
+    }
+
+    /* Page Content */
+    .section-title {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin: 80px auto 30px; /* Centering and spacing */
+}
+
+
+    /* Engine Listings */
+    .engine-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .engine-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-1);
+      transition: var(--transition);
+      padding: 10px;
+    }
+
+    .engine-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .engine-card .card-banner {
+      width: 100%;
+      height: 200px;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .engine-card .card-banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .engine-card:hover .card-banner img {
+      transform: scale(1.05);
+    }
+
+    .engine-card .card-content {
+      padding: 15px;
+      text-align: center;
+    }
+
+    .engine-card .card-title {
+      font-size: 1.2rem;
+      color: var(--secondary-color);
+      margin-bottom: 10px;
+    }
+
+    .engine-card .card-info {
+      font-size: 0.9rem;
+      color: var(--text-color);
+      margin-bottom: 15px;
+    }
+
+    .engine-card .card-price {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--accent-color);
+      margin-bottom: 15px;
+    }
+
+    .btn {
+  background: #2196F3;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 25px; /* Fully rounded corners */
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: 0.3s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+
+  </style>
+</head>
+<body>
+  
+  <!-- Header -->
+  <header class="header">
+    <div class="nav-left">
+        <a href="index.html" class="nav-link">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+    </div>
+    <div class="nav-right">
+        <div class="search-bar">
+            <input type="text" placeholder="Search..." class="search-input">
+            <button class="search-btn">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    <div class="nav-toggle-btn" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</header>
+
+
+
+
+  <!-- Tire Components Listings Section -->
+<section>
+    <h2 class="section-title">Motorcycle Tire Components</h2>
+    <div class="engine-list">
+
+        <!-- Tire Part 1 -->
+        <div class="engine-card">
+            <div class="card-banner">
+                <img src="./assets/images/tire-a.webp" alt="Front Motorcycle Tire">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Front Motorcycle Tire</h3>
+                <p class="card-info">
+                    <i class="fas fa-cogs"></i> Tubeless Design |
+                    <i class="fas fa-road"></i> All-Terrain Grip
+                </p>
+                <p class="card-price">$120 / unit</p>
+                <button class="btn"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+            </div>
+        </div>
+
+        <!-- Tire Part 2 -->
+        <div class="engine-card">
+            <div class="card-banner">
+                <img src="./assets/images/tire-b.jpg" alt="Rear Motorcycle Tire">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Rear Motorcycle Tire</h3>
+                <p class="card-info">
+                    <i class="fas fa-road"></i> Dual-Compound Rubber |
+                    <i class="fas fa-shield-alt"></i> Puncture Resistant
+                </p>
+                <p class="card-price">$145 / unit</p>
+                <button class="btn"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+            </div>
+        </div>
+
+        <!-- Tire Part 3 -->
+        <div class="engine-card">
+            <div class="card-banner">
+                <img src="./assets/images/tire-c.jpg" alt="Inner Tube">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Inner Tube</h3>
+                <p class="card-info">
+                    <i class="fas fa-cogs"></i> Heavy Duty Rubber |
+                    <i class="fas fa-wrench"></i> Pre-installed Valve
+                </p>
+                <p class="card-price">$25 / unit</p>
+                <button class="btn"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+            </div>
+        </div>
+
+        <!-- Tire Part 4 -->
+        <div class="engine-card">
+            <div class="card-banner">
+                <img src="./assets/images/tire-d.avif" alt="Tire Rim">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Tire Rim</h3>
+                <p class="card-info">
+                    <i class="fas fa-cogs"></i> Aluminum Alloy |
+                    <i class="fas fa-ruler-combined"></i> Lightweight Build
+                </p>
+                <p class="card-price">$110 / unit</p>
+                <button class="btn"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+            </div>
+        </div>
+
+        <!-- Tire Part 5 -->
+        <div class="engine-card">
+            <div class="card-banner">
+                <img src="./assets/images/tire-e.webp" alt="Tire Valve Stem">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Tire Valve Stem</h3>
+                <p class="card-info">
+                    <i class="fas fa-tools"></i> Brass Core |
+                    <i class="fas fa-oil-can"></i> Leak-Proof Cap
+                </p>
+                <p class="card-price">$8 / piece</p>
+                <button class="btn"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+            </div>
+        </div>
+
+        <!-- Tire Part 6 -->
+        <div class="engine-card">
+            <div class="card-banner">
+                <img src="./assets/images/tire-f.webp" alt="Tire Bead Sealer">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Tire Bead Sealer</h3>
+                <p class="card-info">
+                    <i class="fas fa-flask"></i> Strong Adhesion |
+                    <i class="fas fa-shield-alt"></i> Weather Resistant
+                </p>
+                <p class="card-price">$15 / bottle</p>
+                <button class="btn"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+            </div>
+        </div>
+
+        <!-- Tire Part 7 -->
+        <div class="engine-card">
+            <div class="card-banner">
+                <img src="./assets/images/tire-g.jpg" alt="Tire Lever Set">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Tire Lever Set</h3>
+                <p class="card-info">
+                    <i class="fas fa-tools"></i> Hardened Steel |
+                    <i class="fas fa-wrench"></i> Non-slip Grip
+                </p>
+                <p class="card-price">$20 / set</p>
+                <button class="btn"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+            </div>
+        </div>
+
+        <!-- Tire Part 8 -->
+        <div class="engine-card">
+            <div class="card-banner">
+                <img src="./assets/images/tire-h.webp" alt="Tire Repair Kit">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Tire Repair Kit</h3>
+                <p class="card-info">
+                    <i class="fas fa-cogs"></i> Plug & Patches |
+                    <i class="fas fa-wrench"></i> Portable Case
+                </p>
+                <p class="card-price">$30 / kit</p>
+                <button class="btn"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+            </div>
+        </div>
+
+        <!-- Tire Part 9 -->
+        <div class="engine-card">
+            <div class="card-banner">
+                <img src="./assets/images/tire-i.jpg" alt="Wheel Spokes Set">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Wheel Spokes Set</h3>
+                <p class="card-info">
+                    <i class="fas fa-cogs"></i> Stainless Steel |
+                    <i class="fas fa-wrench"></i> Includes Nipples
+                </p>
+                <p class="card-price">$45 / set</p>
+                <button class="btn"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+  
+
+  <script>
+    function toggleMenu() {
+      document.querySelector('.nav-menu').classList.toggle('active');
+    }
+  </script>
+
+</body>
+</html>
